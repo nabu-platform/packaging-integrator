@@ -1,1 +1,1 @@
-java -Ddevelopment=true -cp "lib/*:." be.nabu.eai.server.Standalone "$@"
+java -Ddevelopment=false -cp "lib/*:." be.nabu.eai.server.Standalone "$@"

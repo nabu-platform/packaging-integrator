@@ -14,9 +14,7 @@
 		<dependencySet>
 			<outputFileNameMapping>${artifact.artifactId}-${artifact.baseVersion}.${artifact.extension}</outputFileNameMapping>
 			<outputDirectory>/lib</outputDirectory>
-			<!-- <excludes>
-				<exclude>be.nabu.packaging:packaging-integrator</exclude>
-			</excludes> -->
+			<scope>compile</scope>
 		</dependencySet>
 	</dependencySets>
 </assembly>

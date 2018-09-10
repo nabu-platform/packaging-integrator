@@ -1,0 +1,1 @@
+prunmgr.exe "//ES//Nabu"

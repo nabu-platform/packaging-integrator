@@ -2,6 +2,7 @@ REM more information: http://commons.apache.org/proper/commons-daemon/procrun.ht
 REM any settings that start with PR_ followed by the parameter name override settings passed in using the "--" syntax below but this does not seem to work well for some reason
 REM apparently prunsrv is very sensitive to quotes, if you add any (or just in the wrong place?) it simply ignores much of what follows leading to a failed installation
 REM for this reason it is best to install the nabu server in a directory that has no spaces in its path
+REM log files are found: C:\Windows\System32\LogFiles\Apache (or presumably in a similar folder for 64 bit systems)
 
 set BAT_PATH=%~dp0
 set SERVICE_NAME=Nabu

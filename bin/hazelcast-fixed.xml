@@ -1,0 +1,12 @@
+<hazelcast xmlns="http://www.hazelcast.com/schema/config">
+	<network>
+		<join>
+			<multicast enabled="false" />
+			<tcp-ip enabled="true">
+				<!-- include self -->
+				<member>172.17.100.225</member>
+				<member>172.17.101.35</member>
+			</tcp-ip>
+		</join>
+	</network>
+</hazelcast>

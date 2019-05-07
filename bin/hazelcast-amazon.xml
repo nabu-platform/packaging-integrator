@@ -1,0 +1,13 @@
+<hazelcast xmlns="http://www.hazelcast.com/schema/config">
+	<network>
+		<join>
+			<multicast enabled="false"></multicast>
+			<tcp-ip enabled="false"></tcp-ip>
+			<aws enabled="true">
+				<region>eu-central-1</region>
+				<tag-key>cluster</tag-key>
+				<tag-value>value</tag-value>
+			</aws>
+		</join>
+	</network>
+</hazelcast>

@@ -1,0 +1,92 @@
+@hook startup
+
+echo("Registering metrics listeners")
+
+# Check the CPU load, if it is over 75% for at least 5 minutes, this is a red flag
+# We allow for a variation of 20%
+# This with an interval of 5 minutes
+sustainedThreshold(
+	id: "system",
+	category: "load",
+	threshold: 75,
+	duration: 60000 * 5,
+	minimum: 60,
+	variation: 0.2,
+	interval: 60000 * 5,
+	action: lambda(id, category, timestamp, value, 
+		fireEvent("system", "load-75", "load", "ERROR", "The CPU is spiking over 75% for the past 5 minutes: " + value + "%")) )
+
+# If it is over 95% for at least 2.5 minutes, this is also a red flag!
+sustainedThreshold(
+	id: "system",
+	category: "load",
+	threshold: 95,
+	duration: 60000 * 2.5,
+	minimum: 40,
+	variation: 0.2,
+	interval: 60000 * 2.5,
+	action: lambda(id, category, timestamp, value, 
+		fireEvent("system", "load-95", "load", "ERROR", "The CPU is spiking over 95% for the past 2.5 minutes: " + value + "%")) )
+
+# Keep an eye on the file systems, we need to trigger if they get too full
+filestores = filestores()
+for (single : keys(filestores))
+	filestore = filestores[/single]
+	# Trigger an error if we go over 90%
+	threshold(
+		id: "system",
+		category: single,
+		threshold: 90,
+		interval: 1000 * 60 * 60,
+		action: lambda(id, category, timestamp, value, 
+			fireEvent("system", "file-system-90", "file-system", "ERROR", "The filesystem '" + filestore + "' is almost full: " + value + "%")) )
+
+# Keep an eye on memory
+# Heap memory is crucial, if we can't reclaim it over 3 minutes, we are fookered
+sustainedThreshold(
+	id: "system",
+	category: "heap",
+	threshold: 90,
+	duration: 60000 * 3,
+	minimum: 40,
+	interval: 60000 * 3,
+	action: lambda(id, category, timestamp, value, fireEvent("system", "heap-90", "memory", "ERROR", "The heap memory is over 90% for at least 3 minutes: " + value + "%" )) )
+
+sustainedThreshold(
+	id: "system",
+	category: "nonHeap",
+	threshold: 90,
+	duration: 60000 * 3,
+	minimum: 40,
+	interval: 60000 * 3,
+	action: lambda(id, category, timestamp, value, fireEvent("system", "non-heap-90", "memory", "ERROR", "The non-heap memory is over 90% for at least 3 minutes: " + value + "%" )) )
+
+sustainedThreshold(
+	id: "system",
+	category: "memory",
+	threshold: 95,
+	duration: 60000 * 3,
+	minimum: 40,
+	interval: 60000 * 3,
+	action: lambda(id, category, timestamp, value, fireEvent("system", "memory-95", "memory", "ERROR", "All memory is over 95% for at least 3 minutes: " + value + "%" )) )
+
+# Example of monitoring a service execution time
+#threshold(
+#	id: "example.parse",
+#	category: "executionTime",
+#	threshold: 100,
+#	action: lambda(id, category, timestamp, value, fireEvent(id, "sla-execution-violation", "sla-violation", "ERROR", "The service executed in: " + value + "ms" )) )
+
+# More complex example where you want to monitor that at least a certain percentage of the calls is within a predetermined range
+# For example you might agree that 90% of the calls have to be below 100ms
+# The amount makes sure we look at concrete entries, rather than a time range
+# Not sure about variation, it is calculated once we're _over_ the threshold, that means we still want to alarm, even if 90% is under the threshold? (hence 10%)?
+#sustainedThreshold(
+#	id: "example.parse",
+#	category: "executionTime",
+#	threshold: 100,
+#	amount: 100,
+#	minimum: 5,
+#	variation: 0.9,
+#	interval: 20000,
+#	action: lambda(id, category, timestamp, value, echo("Complexer sla: " + value)) )

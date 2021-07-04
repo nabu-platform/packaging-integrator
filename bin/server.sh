@@ -1,1 +1,1 @@
-java -Dglass.platform=Monocle -Dmonocle.platform=Headless -Ddevelopment=false -Dversion=2 -cp "lib/*:." be.nabu.eai.server.Standalone "$@"
+java -Ddevelopment=false -Dglass.platform=Monocle -Dmonocle.platform=Headless -Dprism.order=sw -Dversion=2 -cp "lib/*:." be.nabu.eai.server.Standalone "$@"

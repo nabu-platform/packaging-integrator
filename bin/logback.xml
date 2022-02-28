@@ -6,10 +6,10 @@
 	</appender>
 	
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>server.log</file>
+		<file>nabu-server.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- daily rollover -->
-			<fileNamePattern>server.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>nabu-server.%d{yyyy-MM-dd}.log</fileNamePattern>
 	
 			<!-- keep 30 days' worth of history capped at 3GB total size -->
 			<maxHistory>30</maxHistory>
@@ -21,13 +21,14 @@
 		</encoder>
 	</appender>
 	 	
-	<logger name="com.gargoylesoftware.htmlunit.javascript.host.css" level="error"/>	
+	<logger name="com.gargoylesoftware.htmlunit.javascript.host.css" level="error"/>
+	<logger name="oshi.software.os.linux.LinuxFileSystem" level="error"/>	
 
 	<appender name="FILE_CEF" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>cef.log</file>
+		<file>nabu-cef.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- daily rollover -->
-			<fileNamePattern>cef.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>nabu-cef.%d{yyyy-MM-dd}.log</fileNamePattern>
 	
 			<!-- keep 30 days' worth of history capped at 3GB total size -->
 			<maxHistory>30</maxHistory>

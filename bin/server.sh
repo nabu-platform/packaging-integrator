@@ -1,1 +1,1 @@
-java -Ddevelopment=false -Dglass.platform=Monocle -Dmonocle.platform=Headless -Dprism.order=sw -Dversion=2 -cp "lib/*:." be.nabu.eai.server.Standalone "$@"
+java -Ddevelopment=false -Dglass.platform=Monocle -Dmonocle.platform=Headless -Dprism.order=sw -Dversion=2 -cp "lib/*:." --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED be.nabu.eai.server.Standalone "$@"

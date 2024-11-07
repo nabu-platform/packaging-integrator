@@ -55,6 +55,10 @@
 	</build>
 	<dependencies>
 		<dependency>
+			<groupId>nabu</groupId>
+			<artifactId>eai-module-maven</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>be.nabu.eai</groupId>
 			<artifactId>eai-server</artifactId>
 		</dependency>

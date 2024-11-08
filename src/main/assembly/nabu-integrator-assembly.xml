@@ -15,6 +15,9 @@
 			<outputFileNameMapping>${artifact.artifactId}-${artifact.baseVersion}.${artifact.extension}</outputFileNameMapping>
 			<outputDirectory>/lib</outputDirectory>
 			<scope>compile</scope>
+			<excludes>
+				<exclude>*:packaging-integrator:*</exclude> <!-- Exclude a specific library -->
+			</excludes>
 		</dependencySet>
 	</dependencySets>
 </assembly>

@@ -4,43 +4,68 @@
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
 		</encoder>
 	</appender>
-	
-	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>nabu-server.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- daily rollover -->
 			<fileNamePattern>nabu-server.%d{yyyy-MM-dd}.log</fileNamePattern>
-	
+
 			<!-- keep 15 days' worth of history capped at 3GB total size -->
 			<maxHistory>15</maxHistory>
 			<totalSizeCap>1GB</totalSizeCap>
 		</rollingPolicy>
-	
+
 		<encoder>
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
 		</encoder>
 	</appender>
-	 	
-	<logger name="com.gargoylesoftware.htmlunit.javascript.host.css" level="error"/>
-	<logger name="oshi.software.os.linux.LinuxFileSystem" level="error"/>	
 
-	<appender name="FILE_CEF" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<logger name="com.gargoylesoftware.htmlunit.javascript.host.css"
+		level="error" />
+	<logger name="oshi.software.os.linux.LinuxFileSystem" level="error" />
+
+	<appender name="FILE_CEF"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>nabu-cef.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- daily rollover -->
 			<fileNamePattern>nabu-cef.%d{yyyy-MM-dd}.log</fileNamePattern>
-	
+
 			<!-- keep 30 days' worth of history capped at 3GB total size -->
 			<maxHistory>30</maxHistory>
 			<totalSizeCap>3GB</totalSizeCap>
 		</rollingPolicy>
-	
+
 		<encoder>
 			<pattern>%d{MMM dd HH:mm:ss} %msg%n</pattern>
 		</encoder>
-	</appender> 	
+	</appender>
+	<appender name="FILE_JSONL"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>nabu-events.jsonl</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>nabu-events.%d{yyyy-MM-dd}.jsonl</fileNamePattern>
+
+			<!-- keep 30 days' worth of history capped at 3GB total size -->
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>3GB</totalSizeCap>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%msg%n</pattern>
+		</encoder>
+	</appender>
 	<logger name="cef" level="warn" additivity="false">
-		<appender-ref ref="FILE_CEF"/>
+		<appender-ref ref="FILE_CEF" />
+	</logger>
+	<logger name="jsonl" level="warn" additivity="false">
+		<appender-ref ref="FILE_JSONL" />
 	</logger>
 
 	<root level="info">

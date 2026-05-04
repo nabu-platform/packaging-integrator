@@ -15,6 +15,16 @@
 			<outputFileNameMapping>${artifact.artifactId}-${artifact.baseVersion}.${artifact.extension}</outputFileNameMapping>
 			<outputDirectory>/lib</outputDirectory>
 			<scope>compile</scope>
+			<useTransitiveDependencies>true</useTransitiveDependencies>
+			<excludes>
+				<exclude>*:packaging-integrator:*</exclude> <!-- Exclude a specific library -->
+			</excludes>
+		</dependencySet>
+		<dependencySet>
+			<outputFileNameMapping>${artifact.artifactId}-${artifact.baseVersion}.${artifact.extension}</outputFileNameMapping>
+			<outputDirectory>/lib</outputDirectory>
+			<scope>runtime</scope>
+			<useTransitiveDependencies>true</useTransitiveDependencies>
 			<excludes>
 				<exclude>*:packaging-integrator:*</exclude> <!-- Exclude a specific library -->
 			</excludes>
